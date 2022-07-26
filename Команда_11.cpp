@@ -1,10 +1,28 @@
 ﻿#include <iostream>
+#include <fstream>
+#include <vector>
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	ifstream fin{ "data- (1).txt" };
+
+	vector <double> a;
+
+	for (int i = 0; ; i++)
+		for (int j = 0; j < 8; j++) ;
 }
- 
+
+
+
+
+
+
+
+
+
+
+
 // Советы по началу работы 
 //   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
 //   2. В окне Team Explorer можно подключиться к системе управления версиями.
