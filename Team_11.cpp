@@ -2,18 +2,19 @@
 #include <vector>
 #include <fstream>
 #include <limits>
+#include <cmath>
  using namespace std;
 int main()
 {
-    ifstream fin("C:/Users/admin/Documents/Programming/CPP/Practice/Team _11/files/data- (1).txt");
+    ifstream fin("C:/Users/admin/Documents/Programming/CPP/Practice/Team _11/files/data- (1) little.txt");
     if (!fin.is_open())
     {
         cerr << "Unable to open file\n";
         return(1);
     }
-    vector <vector <double>> points;
-    int const col = 8; // кол-во столбцов в файле
-    vector <double> vtmp(col); //вектор из векторов
+    vector <vector <double>> points;    //вектор из векторов
+    int const col = 8;  // кол-во столбцов в файле
+    vector <double> vtmp(col);
     for (int i = 0; i < 1; ++i) // отбрасываем первую строку файла
     {
         fin.ignore(numeric_limits <streamsize>::max(), '\n');
@@ -32,17 +33,73 @@ int main()
         points.push_back(vtmp);
     }
  
-    for (auto const& vct : points)
-    {
-        for (auto const& val : vct)
+    /*for (auto const& vct : points) //вывод матрицы
         {
-            cout << val << "  ";
-        }
-        cout << endl;
+            for (auto const& val : vct)
+            {
+                cout << val << "  ";
+            }
+            cout <<"\n";
+        } */
+
+    double Dmax, Dmin;  //ввод Dmax и Dmin
+    cin >> Dmax >> Dmin;
+
+    auto it = points.begin();   //поиск и удаление неподходящих элементов (подпункт b)
+    while (it != points.end())
+    {
+        if (((*it)[1] >= (((Dmax+Dmin)/2)*((Dmax+Dmin)/2))/8) || (*it)[5] >= 2) points.erase(it);
+        ++it;             
     }
- 
- 
-    //fin.close();
+
+    //                                                     (построение матрицы связей) подпункт c
+    
+    int const M = points.size();  // M - размер матрицы
+
+    vector <vector <double>> matr_d;    //вектор из векторов
+    int const matr_col = points.size();  // кол-во столбцов в матрице
+    vector <double> matr_vtmp(matr_col);
+    
+    auto it1 = points.begin();
+    it = points.begin();
+    int i = 0;
+    double d = 0;
+
+    while (true)
+    {
+        for (auto val : matr_vtmp)
+        {
+            d = ((*it)[2]-(*it1)[2])*((*it1)[2]-(*it)[2]) + ((*it)[3]-(*it1)[3])*((*it1)[3]-(*it)[3]);
+            if (d > Dmax || d < Dmin) val = 1.0;
+            i++;
+        }
+        if (i > points.size()*points.size())
+        {
+            break;
+        }
+        matr_d.push_back(matr_vtmp);
+        it1++;
+        it++;
+    }
+
+
+    
+    
+
+
+
+
+
+
+    for (auto const& vct : matr_d) //вывод матрицы
+        {
+            for (auto const& val : vct)
+            {
+                cout << val << "  ";
+            }
+            cout <<"\n";
+        }
+    cout<<M;
 }
 
 
