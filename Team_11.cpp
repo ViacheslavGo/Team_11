@@ -11,7 +11,7 @@ int main()
     cin >> Dmin >> Dmax;
 
     int number_files = 2;
-    string base_file_name = "files/data- (#) little.txt";
+    string base_file_name = "files/data- (#).txt";
     for (int i = 1; i <= number_files; ++i)
     {
         string file_name = base_file_name;
