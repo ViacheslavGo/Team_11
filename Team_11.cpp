@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿/*---------------------------------------------------------часть 1-----------------------------------------------------------*/
+#include <iostream>
 #include <vector>
 #include <fstream>
 #include <limits>
